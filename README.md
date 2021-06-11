@@ -45,3 +45,18 @@ Resultat de la execucio
 root@instancia-backups:~/scripts# ./fitxers-backups-rsync.sh
 root@instancia-backups:~/scripts#
 ```
+
+## Copies Fitxers segona versio
+Aquest script copia el contingut del directori on son els fitxers del servidor web i l'envia al servidor de backup via rsync. S'executa cada dia. Per evitar que el servidor s'ompleni de copies diaries senceres, en el moment d'execucio, si NO es dilluns,  esborrarem la copia de la setmana anterior. Aixi mantenim copies setmanals.
+Pero quant passen els mesos, pot ser nomes ens importen copies mensuals i aixi estalviem espai ja que un any te 12 mesos o 54 setmanes, per aixo, quan es dilluns i el dia del mes es superior a 7, s'esborrara la copia del mes anterior. D'aquesta manera es queda una copia del dilluns de la primera setmana de cada mes (o de la segona ja que el script es podria millorar).
+Per ultim, per estalviar mes espai, generarem el .tar amb compressio, el que el convertira en .tar.gz
+
+[fitxers-backups-rsync-v2.sh](fitxers-backups-rsync-v2.sh)
+
+Resultat de la execucio
+
+```
+root@instancia-backups:~/scripts# ./fitxers-backups-rsync-v2.sh
+tar: Removing leading `/' from member names
+root@instancia-backups:~/scripts#
+```
